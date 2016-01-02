@@ -1,6 +1,5 @@
 import binascii
-from challenge2 import fixed_xor
-from itertools import cycle
+from challenge2 import xor
 # Source: http://www.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
 REL_ENG_CHAR_FREQS = {
     'E': .1202,
@@ -44,7 +43,24 @@ def single_byte_xor_reverse(hex_string):
 
 
 def _score_key(byte_string, key):
-    xored = fixed_xor(byte_string, cycle(binascii.b2a_hex(key)))
+    dif_score = 0
+    xored = xor(byte_string, binascii.b2a_hex(key))
+    rel_freqs = get_char_freqs(xored)
+    for k in rel_freqs.keys():
+        dif_score += abs(rel_freqs[k]-REL_ENG_CHAR_FREQS[k])
+    return dif_score
+
+def get_char_freqs(string):
+    length = len(string)
+    string = string.upper()
+    counts = {}
+    for k in REL_ENG_CHAR_FREQS.keys():
+        counts[k] = 0
+        for c in string:
+            if c == k:
+                counts[k] += 1
+        counts[k] = length/counts[k]
+    return counts
 
 def main():
     print(single_byte_xor_reverse('1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'))
