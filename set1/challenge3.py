@@ -47,7 +47,7 @@ def _score_key(byte_string, key):
     xored = xor(byte_string, binascii.b2a_hex(key))
     rel_freqs = get_char_freqs(xored)
     for k in rel_freqs.keys():
-        dif_score += abs(rel_freqs[k]-REL_ENG_CHAR_FREQS[k])
+        dif_score += abs(rel_freqs[k]-REL_ENG_CHAR_FREQS[k])**2
     return dif_score
 
 def get_char_freqs(string):
