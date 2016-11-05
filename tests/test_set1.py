@@ -1,6 +1,6 @@
-from set1.challenge1 import hex_to_b64
-from set1.challenge2 import xor
-from set1.challenge3 import single_byte_xor_reverse
+from set1.challenge_1 import hex_to_b64
+from set1.challenge_2 import xor
+from set1.challenge_3 import single_byte_xor_reverse
 
 CHAL_1_INPUT = '49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d'
 CHAL_1_OUTPUT = 'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t'

@@ -1,5 +1,5 @@
 import binascii
-from challenge2 import xor
+from .challenge_2 import xor
 # Source: http://www.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
 REL_ENG_CHAR_FREQS = {
     'E': .1202,
