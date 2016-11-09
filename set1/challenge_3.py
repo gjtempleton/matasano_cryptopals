@@ -1,5 +1,5 @@
 import binascii
-from .challenge_2 import xor
+from .challenge_2 import hex_xor
 # Source: http://www.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
 REL_ENG_CHAR_FREQS = {
     'E': .1202,
@@ -30,12 +30,13 @@ REL_ENG_CHAR_FREQS = {
     'Z': .0007
 }
 
+
 def single_byte_xor_reverse(hex_string):
     diff_score = 10000
     result = ""
-    keyrange = [[byte] for byte in range(0, 255)]
+    keyrange = [byte for byte in range(0, 255)]
     for key in keyrange:
-        string, new_score = _score_key(hex_string, key)
+        string, new_score = _score_key(hex_string, bytes(key))
         if new_score < diff_score:
             diff_score = new_score
             result = ""
@@ -44,11 +45,17 @@ def single_byte_xor_reverse(hex_string):
 
 def _score_key(byte_string, key):
     dif_score = 0
-    xored = xor(byte_string, binascii.b2a_hex(key))
+    i = 0
+    key_array = []
+    while i< len(byte_string):
+        key_array.append(key)
+        i += 1
+    xored = hex_xor(byte_string, binascii.b2a_hex(bytearray(key_array)))
     rel_freqs = get_char_freqs(xored)
     for k in rel_freqs.keys():
         dif_score += abs(rel_freqs[k]-REL_ENG_CHAR_FREQS[k])**2
     return dif_score
+
 
 def get_char_freqs(string):
     length = len(string)
@@ -61,6 +68,7 @@ def get_char_freqs(string):
                 counts[k] += 1
         counts[k] = length/counts[k]
     return counts
+
 
 def main():
     print(single_byte_xor_reverse('1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'))

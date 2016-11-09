@@ -1,6 +1,9 @@
 from .utils import string_to_bits
 
 
+def break_repeating_key_xor(ciphertext):
+    return ""
+
 def hanning_distance(string1, string2):
     if len(string2) != len(string1):
         raise Exception("Two strings must be the same length")

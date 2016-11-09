@@ -1,8 +1,10 @@
+import os
 from set1.challenge_1 import hex_to_b64
 from set1.challenge_2 import hex_xor
 from set1.challenge_3 import single_byte_xor_reverse
+from set1.challenge_4 import detect_single_character_xor
 from set1.challenge_5 import repeating_key_xor
-from set1.challenge_6 import hanning_distance
+from set1.challenge_6 import hanning_distance, break_repeating_key_xor
 
 CHAL_1_INPUT = '49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d'
 CHAL_1_OUTPUT = 'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t'
@@ -12,9 +14,9 @@ CHAL_2_INPUT_2 = '686974207468652062756c6c277320657965'
 CHAL_2_OUTPUT = '746865206b696420646f6e277420706c6179'
 
 CHAL_3_INPUT = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
-CHAL_3_OUTPUT = ''
+CHAL_3_OUTPUT = '00'
 
-CHAL_4_INPUT = None
+CHAL_4_INPUT_FILE = 'fixtures/CHAL_4_TEXT.txt'
 CHAL_4_OUTPUT = None
 
 CHAL_5_PLAINTEXT = '''Burning 'em, if you ain't quick and nimble
@@ -37,7 +39,9 @@ def test_challenge_3():
 
 
 def test_challenge_4():
-    pass
+    with open(os.path.join(os.path.dirname(__file__), CHAL_4_INPUT_FILE)) as f:
+        chal_4_input = f.read()
+    assert detect_single_character_xor(chal_4_input) == CHAL_4_OUTPUT
 
 
 def test_challenge_5():
@@ -45,7 +49,9 @@ def test_challenge_5():
 
 
 def test_challenge_6():
-    pass
+    CHAL_6_INPUT = None
+    CHAL_6_OUTPUT = None
+    assert break_repeating_key_xor(CHAL_6_INPUT) == CHAL_6_OUTPUT
 
 
 def test_hanning_distance():

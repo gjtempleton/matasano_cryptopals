@@ -2,7 +2,7 @@ import binascii
 from itertools import cycle
 
 
-def xor(string1, string2):
+def hex_xor(string1, string2):
     if not len(string1) == len(string2):
         raise Exception
     string1_bytes = bytes.fromhex(string1)
@@ -11,8 +11,9 @@ def xor(string1, string2):
     xored_hex = binascii.b2a_hex(xored_bytes).decode()
     return xored_hex
 
+
 def main():
-    print(xor('1c0111001f010100061a024b53535009181c', '686974207468652062756c6c277320657965'))
+    print(hex_xor('1c0111001f010100061a024b53535009181c', '686974207468652062756c6c277320657965'))
 
 if __name__ == "__main__":
     main()
